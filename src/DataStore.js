@@ -114,7 +114,7 @@ export default class DataStore {
                 cellData.isHeader = true;
                 cellData.index = 0;
                 cellData.type = key;
-                cellData[VALUE] = this._sumOfColumnWithIndex(this.store[key], 1);
+                cellData[VALUE] = this._averageOfColumnWithIndex(this.store[key], 1);
                 cellData.valueFor = key;
                 cellData.total = cellData.value;
                 cellData[PERCENT] = 100;
