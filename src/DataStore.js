@@ -126,8 +126,8 @@ export default class DataStore {
                 const totalRows = this.store[key].length;
                 largeRow.forEach((el, index) => {
                     if(index < 2) return;
-                    const value = this._sumOfColumnWithIndex(this.store[key], index);
-                    const percent = this._getPercentage(this._sumOfFirstColumnUpToIndex(this.store[key], totalRows), value);
+                    const value = this._averageOfColumnWithIndex(this.store[key], index);
+                    const percent = this._getPercentage(this._averageOfColumnWithIndex(this.store[key], 1), value);
                     this.headers[key].push({
                         isHeader: true,
                         index: index,
@@ -170,6 +170,21 @@ export default class DataStore {
         return sum;
     };
 
+    _averageOfColumnWithIndex = (arr, index) => {
+        let avg = 0;
+        let sum = 0;
+        let totalCount = 0;
+        arr.forEach(el => {
+            try{
+                sum += el[index].value;
+                totalCount++;
+            }catch(e){
+                sum += 0;
+            }
+        })
+        avg = (sum/totalCount);
+        return avg;
+    }
     /**
      *
      * @param arr
@@ -288,7 +303,7 @@ export default class DataStore {
      * @param color
      * @returns {string}
      */
-    _shadeCellWithColor = (percent, color = "#3f83a3") => {
+    _shadeCellWithColor = (percent, color = "#5773E1") => {
         const rate = 1.0 - Math.ceil(percent / 10) / 10;
         const f = parseInt(color.slice(1), 16),
             t = rate < 0 ? 0 : 255,
