@@ -183,7 +183,7 @@ export default class DataStore {
             }
         })
         avg = (sum/totalCount);
-        return avg;
+        return Math.round(avg * 100) / 100;
     }
     /**
      *
